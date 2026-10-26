@@ -1,0 +1,77 @@
+# Compila Copyex FTP Server desde el código fuente.
+# - En cada push / pull request: ejecuta las pruebas y genera los EXE portables x64 y x86.
+# - Al subir una etiqueta vX.Y.Z: además publica una Release con los dos EXE.
+#
+# Firma con SignPath (cuando acepten el proyecto): añadir tras "Generar EXE" un paso
+# signpath/github-action-submit-signing-request con los datos que da SignPath
+# (organization-id, project-slug, signing-policy-slug y el token en Settings > Secrets
+# como SIGNPATH_API_TOKEN), y publicar los EXE ya firmados.
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: 1
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Comprobar versión
+        shell: pwsh
+        run: |
+          [xml]$p = Get-Content src/CopyexFTPServer/CopyexFTPServer.csproj
+          $v = ($p.Project.PropertyGroup | Where-Object { $_.Version } | Select-Object -First 1).Version
+          if (-not $v) { throw "No se encuentra <Version> en el .csproj" }
+          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "v$v") {
+            throw "La etiqueta $env:GITHUB_REF_NAME no coincide con la versión v$v"
+          }
+          "VERSION=$v" >> $env:GITHUB_ENV
+          "Versión $v"
+
+      - name: Pruebas
+        run: dotnet run --project tests/CopyexFTPServer.Tests/CopyexFTPServer.Tests.csproj -c Release
+
+      - name: Generar EXE portables
+        shell: pwsh
+        run: |
+          foreach ($rid in 'win-x64', 'win-x86') {
+            dotnet publish src/CopyexFTPServer/CopyexFTPServer.csproj -c Release -r $rid --self-contained true `
+              -p:PublishSingleFile=true -p:PublishTrimmed=false -p:IncludeNativeLibrariesForSelfExtract=true `
+              -o "out/$rid"
+            if ($LASTEXITCODE -ne 0) { throw "Error compilando $rid" }
+            Copy-Item "out/$rid/CopyexFTPServer.exe" "out/CopyexFTPServer-$env:VERSION-$rid.exe"
+          }
+          Get-FileHash out/*.exe -Algorithm SHA256 | Format-Table -AutoSize
+
+      - name: Guardar artefactos
+        uses: actions/upload-artifact@v4
+        with:
+          name: CopyexFTPServer-${{ env.VERSION }}
+          path: out/CopyexFTPServer-*.exe
+
+      - name: Publicar Release
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:GITHUB_REF_NAME (Get-ChildItem out/CopyexFTPServer-*.exe).FullName `
+            --title "Copyex FTP Server $env:VERSION" `
+            --notes "EXE portables de Copyex FTP Server $env:VERSION (x64 y x86). Ver README para la política de firma de código."

@@ -1,0 +1,54 @@
+COPYEX FTP SERVER
+=================
+Desarrollado por Copyex Ofimática S.L.
+Copyright (C) 2026 Copyex Ofimática S.L.
+Software libre bajo la licencia GNU AGPL v3 (fichero LICENSE). Se distribuye SIN NINGUNA GARANTÍA.
+"Copyex" y su logotipo son marcas de Copyex Ofimática S.L.; la licencia no da derechos sobre ellas.
+
+Servidor FTP (y SFTP opcional) portable para Windows 10/11, pensado para escáneres y
+multifunciones. Reescrito desde cero sobre .NET 10 con todas las funciones de la 2.1.1.
+
+COMPILAR
+--------
+  COMPILAR_PORTABLE_X64.bat   -> bin\Portable\win-x64\CopyexFTPServer.exe
+  COMPILAR_PORTABLE_X86.bat   -> bin\Portable\win-x86\CopyexFTPServer.exe
+  EJECUTAR_PRUEBAS.bat        -> pruebas automáticas (FTP, SFTP y seguridad)
+
+La primera vez se descarga un SDK .NET 10 portable en .tools\ (no se instala nada en
+Windows). El EXE resultante es autocontenido: no necesita .NET en el PC destino.
+Nota: si la carpeta del proyecto tiene una ruta muy larga, Windows puede dar errores al
+compilar; en ese caso cópiala a una ruta corta (por ejemplo C:\Proyectos\CopyexFTP).
+
+ACTUALIZAR DESDE 2.x
+--------------------
+1. Cierra la 2.x desde el icono junto al reloj (Salir).
+2. Sustituye el EXE por el nuevo en la MISMA carpeta (donde está config.json).
+3. Al abrir, se importan puerto, carpeta raíz, opciones y usuarios con sus contraseñas.
+   Las dos versiones no pueden abrirse a la vez (comparten el bloqueo de instancia única).
+
+VALORES INICIALES (instalación nueva)
+-------------------------------------
+FTP puerto 21 · raíz C:\escaner · usuario escaner / escaner
+Puertos de datos (pasivo) 50000-50100 · solo red local · 50 conexiones (10 por IP)
+SFTP desactivado (puerto 22 si se activa) · cierre de sesiones inactivas a los 300 s
+
+FUNCIONES
+---------
+- Servidor FTP con usuarios, raíz general o propia por usuario y permisos
+  (listar, descargar, subir, crear carpetas, renombrar, borrar).
+- SFTP opcional (Configuración > SFTP): mismos usuarios, carpetas y permisos, cifrado.
+  Muestra la huella de la clave del servidor para comprobarla en el escáner.
+- Panel: botones Iniciar (verde), Detener (rojo) y Reiniciar (naranja); IP y nombre del
+  equipo copiables; cambio rápido del puerto FTP; escaneos recibidos hoy.
+- Perfil de red Pública/Privada/Dominio con «Cambiar a privada» y «Comprobar».
+- DHCP / IP fija: búsqueda de IPs libres, establecer IP fija conservando DNS, volver a DHCP.
+- Acceso directo «ESCANER» en el escritorio hacia la carpeta raíz (se crea al guardar o
+  iniciar, y con el botón «Acceso directo» del Panel).
+- Arranque con Windows, inicio automático del servidor, arranque en bandeja.
+- Notificación junto al reloj al recibir escaneos (agrupadas).
+- Registro en pantalla, solo en memoria: se borra al cerrar la aplicación.
+
+AVISO
+-----
+FTP no cifra las contraseñas: no abras el puerto a Internet. Si el escáner lo admite,
+usa SFTP.

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Pruebas del motor FTP, la configuración y la seguridad de rutas.
+       Compila los mismos archivos fuente que la aplicación (sin la interfaz). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>CopyexFTPServer.Tests</AssemblyName>
+    <RootNamespace>CopyexFTPServer.Tests</RootNamespace>
+    <InformationalVersion>1.0.0</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\CopyexFTPServer\Core\*.cs" Link="Linked\Core\%(Filename)%(Extension)" />
+    <Compile Include="..\..\src\CopyexFTPServer\Models\*.cs" Link="Linked\Models\%(Filename)%(Extension)" />
+    <Compile Include="..\..\src\CopyexFTPServer\Ftp\*.cs" Link="Linked\Ftp\%(Filename)%(Extension)" />
+    <Compile Include="..\..\src\CopyexFTPServer\Sftp\*.cs" Link="Linked\Sftp\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

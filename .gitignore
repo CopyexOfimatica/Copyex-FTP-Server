@@ -1,0 +1,13 @@
+# Resultados de compilación: se generan en GitHub Actions, no se suben al repositorio
+bin/
+obj/
+*.exe
+*.pdb
+
+# SDK .NET portable descargado por _BUILD_PORTABLE.bat
+.tools/
+
+# Configuración y datos locales
+config.json
+*.user
+.vs/

@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <ApplicationUseCompatibleTextRendering>false</ApplicationUseCompatibleTextRendering>
+
+    <AssemblyName>CopyexFTPServer</AssemblyName>
+    <RootNamespace>CopyexFTPServer</RootNamespace>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Product>Copyex FTP Server</Product>
+    <Company>Copyex Ofimática S.L.</Company>
+    <Authors>Copyex Ofimática S.L.</Authors>
+    <Copyright>Copyright © 2026 Copyex Ofimática S.L. Licencia AGPL-3.0</Copyright>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+    <Description>Servidor FTP portable para escáneres y multifunciones</Description>
+
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\copyex.ico</ApplicationIcon>
+
+    <!-- Publicación portable: un único EXE autocontenido -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+    <SatelliteResourceLanguages>es</SatelliteResourceLanguages>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\copyex-ftp.png" LogicalName="CopyexFTPServer.Logo.png" />
+    <EmbeddedResource Include="Assets\copyex-brand.png" LogicalName="CopyexFTPServer.Brand.png" />
+    <EmbeddedResource Include="Assets\copyex.ico" LogicalName="CopyexFTPServer.App.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="CopyexFTPServer.Tests" />
+    <AssemblyAttribute Include="System.Reflection.AssemblyTrademarkAttribute">
+      <_Parameter1>Copyex es una marca de Copyex Ofimática S.L.</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>
