@@ -1,7 +1,5 @@
 # Copyex FTP Server
 
-Free, portable FTP and SFTP server for Windows that receives scans from network printers and multifunction devices.
-
 Servidor FTP y SFTP gratuito y portable para Windows, pensado para recibir los escaneos de impresoras y multifunciones.
 
 Desarrollado y mantenido por **Copyex Ofimática S.L.** (España).
@@ -39,45 +37,38 @@ EJECUTAR_PRUEBAS.bat        rem pruebas automáticas (FTP, SFTP y seguridad)
 La primera vez se descarga un SDK de .NET 10 portable en `.tools\` (no se instala nada en Windows).
 Las versiones oficiales se compilan automáticamente en GitHub Actions (`.github/workflows/build.yml`).
 
-## Code signing policy
+## Política de firma de código
 
-Free code signing provided by [SignPath.io](https://about.signpath.io),
-certificate by [SignPath Foundation](https://signpath.org).
+Firma de código gratuita proporcionada por [SignPath.io](https://about.signpath.io),
+con certificado de [SignPath Foundation](https://signpath.org).
 
-- Committers and reviewers: [Copyex team members](../../graphs/contributors)
-- Approvers: Copyex Ofimática S.L. (informatica@copyex.es)
+- Desarrolladores y revisores: [miembros del equipo de Copyex](../../graphs/contributors)
+- Aprobadores: Copyex Ofimática S.L. (informatica@copyex.es)
 
-Every signed release is built from this repository's source code by GitHub Actions
-and manually approved before signing.
+Cada versión firmada se compila a partir del código fuente de este repositorio con GitHub Actions
+y se aprueba manualmente antes de firmarla.
 
-## Privacy policy
+## Política de privacidad
 
-This program will not transfer any information to other networked systems unless
-specifically requested by the user or the person installing or operating it. It only
-serves files to the FTP/SFTP clients (scanners) configured by the user on the local network.
+Este programa no transmite ninguna información a otros sistemas de la red salvo que lo solicite
+expresamente el usuario o la persona que lo instala o lo utiliza. Solo sirve ficheros a los
+clientes FTP/SFTP (escáneres) que el usuario configure en la red local.
 
-## License / Licencia
+## Licencia
 
 Copyright © 2026 Copyex Ofimática S.L.
 
-This program is free software: you can redistribute it and/or modify it under the terms
-of the GNU Affero General Public License version 3, as published by the Free Software
-Foundation. See [LICENSE](LICENSE).
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the GNU Affero General Public License for more details.
-
 Este programa es software libre: puede redistribuirlo y/o modificarlo bajo los términos de
-la Licencia Pública General Affero de GNU, versión 3. Se distribuye **sin ninguna garantía**.
+la Licencia Pública General Affero de GNU, versión 3, publicada por la Free Software Foundation.
+Consulte el fichero [LICENSE](LICENSE).
+
+Este programa se distribuye con la esperanza de que sea útil, pero **SIN NINGUNA GARANTÍA**,
+ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO.
+Consulte la Licencia Pública General Affero de GNU para más detalles.
 El texto legal válido es el original en inglés del fichero [LICENSE](LICENSE).
 
-## Trademarks
-
-"Copyex" and the Copyex logo are trademarks of Copyex Ofimática S.L. The AGPL-3.0
-license covers the source code and assets only and does not grant permission to use
-these trademarks. Forks and redistributions must remove the Copyex name and logo.
+## Marcas registradas
 
 "Copyex" y el logotipo de Copyex son marcas de Copyex Ofimática S.L. La licencia AGPL-3.0
-no concede ningún derecho sobre ellas: las versiones modificadas o redistribuidas deben
-quitar el nombre y el logotipo de Copyex.
+cubre únicamente el código fuente y los recursos, y no concede ningún derecho sobre estas marcas:
+las versiones modificadas o redistribuidas deben quitar el nombre y el logotipo de Copyex.
