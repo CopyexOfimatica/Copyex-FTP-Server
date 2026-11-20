@@ -1,11 +1,7 @@
 # Compila Copyex FTP Server desde el código fuente.
 # - En cada push / pull request: ejecuta las pruebas y genera los EXE portables x64 y x86.
 # - Al subir una etiqueta vX.Y.Z: además publica una Release con los dos EXE.
-#
-# Firma con SignPath (cuando acepten el proyecto): añadir tras "Generar EXE" un paso
-# signpath/github-action-submit-signing-request con los datos que da SignPath
-# (organization-id, project-slug, signing-policy-slug y el token en Settings > Secrets
-# como SIGNPATH_API_TOKEN), y publicar los EXE ya firmados.
+# Los ejecutables no se firman: el hash SHA-256 queda en el registro de la compilación.
 
 name: Build
 
@@ -74,4 +70,4 @@ jobs:
         run: |
           gh release create $env:GITHUB_REF_NAME (Get-ChildItem out/CopyexFTPServer-*.exe).FullName `
             --title "Copyex FTP Server $env:VERSION" `
-            --notes "EXE portables de Copyex FTP Server $env:VERSION (x64 y x86). Ver README para la política de firma de código."
+            --notes "EXE portables de Copyex FTP Server $env:VERSION (x64 y x86). Ejecutables sin firma digital: ver README para comprobar el hash SHA-256."

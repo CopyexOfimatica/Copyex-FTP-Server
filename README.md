@@ -26,6 +26,8 @@ FTP no cifra las contraseñas: no abra el puerto a Internet. Si el escáner lo a
 
 Las versiones publicadas están en [Releases](../../releases). Copie `CopyexFTPServer.exe` a una carpeta del equipo y ejecútelo.
 
+Los ejecutables no están firmados digitalmente: Windows puede mostrar un aviso al abrirlos (ver [Firma de código](#firma-de-código)).
+
 ## Compilar
 
 ```bat
@@ -37,16 +39,19 @@ EJECUTAR_PRUEBAS.bat        rem pruebas automáticas (FTP, SFTP y seguridad)
 La primera vez se descarga un SDK de .NET 10 portable en `.tools\` (no se instala nada en Windows).
 Las versiones oficiales se compilan automáticamente en GitHub Actions (`.github/workflows/build.yml`).
 
-## Política de firma de código
+## Firma de código
 
-Firma de código gratuita proporcionada por [SignPath.io](https://about.signpath.io),
-con certificado de [SignPath Foundation](https://signpath.org).
+Los ejecutables **no están firmados** con un certificado de firma de código. Por eso Windows
+SmartScreen o el antivirus pueden avisar de que el editor es desconocido al descargarlos o ejecutarlos.
+Para continuar, pulse *Más información* → *Ejecutar de todas formas*.
 
-- Desarrolladores y revisores: [miembros del equipo de Copyex](../../graphs/contributors)
-- Aprobadores: Copyex Ofimática S.L. (informatica@copyex.es)
+Cada versión se compila automáticamente a partir del código fuente de este repositorio con
+GitHub Actions. El registro de la compilación ([Actions](../../actions)) muestra el hash SHA-256
+de los ejecutables, para comprobar que el archivo descargado es el original:
 
-Cada versión firmada se compila a partir del código fuente de este repositorio con GitHub Actions
-y se aprueba manualmente antes de firmarla.
+```powershell
+Get-FileHash .\CopyexFTPServer-1.0.0-win-x64.exe -Algorithm SHA256
+```
 
 ## Política de privacidad
 
